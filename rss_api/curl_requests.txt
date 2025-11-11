@@ -1,0 +1,12 @@
+# create user
+curl -XPOST localhost:3000/users/create -d '
+{"firstName":"npc",
+"lastName": "aura",
+"email": "npc@aura.com"
+}' -H "Content-Type:application/json" | jq
+
+#create config
+curl -XPOST localhost:3000/configs/create -d '{"userId": "1", "feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json"
+
+# get user by mail id
+curl localhost:3000/users/mail/npc@aura.com

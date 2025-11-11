@@ -1,0 +1,15 @@
+# Use root/example as user/password credentials
+
+services:
+
+  db:
+    image: mysql:8.0.44-debian
+    restart: always
+    ports:
+      - ${MYSQL_HOST_PORT}:3306
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    # (this is just an example, not intended to be a production configuration)
+
