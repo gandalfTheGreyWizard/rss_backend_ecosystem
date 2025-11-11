@@ -11,12 +11,15 @@
     "debug": "~2.6.9",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
-    "morgan": "^1.10.1",
     "mysql2": "^3.15.3",
     "sequelize": "^6.37.7",
-    "winston": "^3.18.3"
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.18.3",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "sequelize-auto-jsdocs": "^0.9.2"
   }
 }

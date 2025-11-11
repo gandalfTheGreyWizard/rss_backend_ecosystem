@@ -1,16 +1,31 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var configsRouter = require('./routes/configs');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const configsRouter = require('./routes/configs');
 
-var app = express();
+const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerJSDoc = require('swagger-jsdoc');
+const YAML = require('yamljs');
 
+const jsdocComponents = YAML.load('components.yaml');
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Welcome to the rss backend applications, swagger',
+      version: '1.0.0',
+    },
+    ...jsdocComponents,
+  },
+  apis: ['./routes/*.js'], // files containing annotations as above
+};
+const swaggerSpec = swaggerJSDoc(options);
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -20,4 +35,5 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/configs', configsRouter);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 module.exports = app;
