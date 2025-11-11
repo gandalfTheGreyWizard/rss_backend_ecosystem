@@ -1,8 +1,12 @@
+//imports
 const { DataTypes } = require('sequelize');
+const logger = require('../helpers/logger');
 //const sequelize = new Sequelize('server=127.0.0.1;uid=root;pwd=example,database=testdb');
 //
 const userModel  = require('./user');
 const sequelize = require('./connection');
+
+//functional
 exports.Config = sequelize.define(
   'Config',
   {
@@ -34,7 +38,7 @@ exports.Config = sequelize.define(
 try {
   this.Config.sync({ force: true });
 } catch(err) {
-  console.error('err', err);
+  logger.error('err', err);
 }
 
 exports.createConfig = async (configObject) => {

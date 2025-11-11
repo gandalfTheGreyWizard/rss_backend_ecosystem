@@ -1,13 +1,14 @@
+//imports
 const configModel = require('../models/config');
-
+const logger = require('../helpers/logger');
+//functional 
 exports.createConfig = async (req,res) => {
-  console.log(req.body);
   try {
     const createdConfig = await configModel.createConfig(req.body);
-    console.log(JSON.stringify(createdConfig.dataValues));
+    logger.info(JSON.stringify(createdConfig.dataValues));
     res.send(JSON.stringify(createdConfig.dataValues));
   } catch(err) {
-    console.error(err);
+    logger.error(err)
     res.status(400).send({ message: 'error creating config' });
   }
 }
