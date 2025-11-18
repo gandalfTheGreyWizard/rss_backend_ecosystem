@@ -36,6 +36,7 @@ exports.Config = sequelize.define(
 )
 
 try {
+  //userModel.User.sync({ force: true });
   this.Config.sync({ force: true });
 } catch(err) {
   logger.error('err', err);

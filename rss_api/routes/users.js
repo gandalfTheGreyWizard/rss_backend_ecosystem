@@ -37,6 +37,24 @@ router.get('/mail/:mailId', userController.getUserByEmailId);
  *       200:
  *         description: Responds with the created user.
  */
-router.post('/create', userController.handleUsers);
+router.post('/create', userController.createUser);
+
+/**
+ * @openapi
+ * /users/mail/{mailId}:
+ *   get:
+ *     parameters:
+ *      -  name: mailId
+ *         description: mail id of the user to fetch
+ *         in: path
+ *         schema:
+ *          required: true
+ *          type: string
+ *     description: get a user against provided mail id!
+ *     responses:
+ *       200:
+ *         description: It responds with a user object.
+ */
+router.patch('/:userId/password', userController.updateUserPassword);
 
 module.exports = router;

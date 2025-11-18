@@ -12,9 +12,12 @@
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "mysql2": "^3.15.3",
+    "passport": "^0.7.0",
+    "passport-magic-link": "^2.1.1",
     "sequelize": "^6.37.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "tslib": "^2.8.1",
     "winston": "^3.18.3",
     "yamljs": "^0.3.0"
   },
