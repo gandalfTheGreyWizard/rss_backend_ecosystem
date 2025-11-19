@@ -1,28 +1,35 @@
+//module imports
 require('dotenv').config();
-
-//const passport = require('passport');
-//const magicLinkStrategy = require('passport-magic-link').Strategy;
-//const sendgrid = require('@sendgrid/mail');
-
-//sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
+const logger = require('../helpers/logger');
+const helperFunctions = require('../helpers/helperFunctions');
+const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
 
-//passport.use(new MagicLinkStrategy({
-  //secret: 'keyboard cat',
-  //userFields: [ 'email' ],
-  //tokenField: 'token',
-  //verifyUserAfterToken: true
-//}, (user, token) => {
-  //const msg = {
-    //to: user.email,
-    //from: process.env['EMAIL'],
-    //subject: 'Sign in to Todos',
-    //text: 'Hello! Click the link below to finish signing in to Todos.\r\n\r\n' + link,
-    //html: '<h3>Hello!</h3><p>Click the link below to finish signing in to Todos.</p><p><a href="' + link + '">Sign in</a></p>',
-  //};
-  //return sendgrid.send(msg);
-//}, (user) => {
-  //console.log(user);
-//}));
+//functional sections
+exports.authorizeUser = async (req, res) => {
+  try {
+    const userAgainstMailId = await userModel.getUserByEmailId(req.body.email);
+    const checkPassword = helperFunctions.checkPassword(userAgainstMailId.dataValues, req.body.password);
+    if (checkPassword) {
+      const userObject = helperFunctions.sanitizeUser(userAgainstMailId);
+      const jwtToken = jwt.sign(userObject, 'static_secret', { expiresIn: "1h" });
+      res.send({ token: jwtToken.toString() });
+    } else {
+      res.status(401).send({ message: 'invalid credentials provided' });
+    }
+  } catch(err) {
+    logger.error(err);
+    res.status(400).send({ message: 'bad request' });
+  }
+}
 
-
+exports.decodeJwt = async (req, res) => {
+  const jwtRequestToken = req.headers.authorization.split(" ")[1];
+  try {
+    console.log(jwt.verify(jwtRequestToken, 'static_secret'));
+    console.log(jwt.decode(jwtRequestToken));
+  } catch(err) {
+    logger.error(err);
+  }
+  res.send({message: 'headers in the query object'});
+}

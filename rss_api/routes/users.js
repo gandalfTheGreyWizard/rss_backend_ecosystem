@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/users');
+const helperFunctions = require('../helpers/helperFunctions');
 
 /**
  * @openapi
@@ -37,7 +38,7 @@ router.get('/mail/:mailId', userController.getUserByEmailId);
  *       200:
  *         description: Responds with the created user.
  */
-router.post('/create', userController.createUser);
+router.post('/create', helperFunctions.authorizeJwt, userController.createUser);
 
 /**
  * @openapi
@@ -55,6 +56,6 @@ router.post('/create', userController.createUser);
  *       200:
  *         description: It responds with a user object.
  */
-router.patch('/:userId/password', userController.updateUserPassword);
+router.patch('/:userId/password', helperFunctions.authorizeJwt, userController.updateUserPassword);
 
 module.exports = router;

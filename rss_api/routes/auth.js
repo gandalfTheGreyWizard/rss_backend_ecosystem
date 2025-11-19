@@ -6,52 +6,10 @@ const sendgrid = require('@sendgrid/mail');
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
 const userModel = require('../models/user');
+const authController = require('../controllers/auth');
 
-//passport.use(new MagicLinkStrategy({
-  //secret: 'keyboard cat',
-  //userFields: [ 'email' ],
-  //tokenField: 'token',
-  //verifyUserAfterToken: true
-//}, (user, token) => {
-  //const msg = {
-    //to: user.email,
-    //from: process.env['EMAIL'],
-    //subject: 'Sign in to Todos',
-    //text: 'Hello! Click the link below to finish signing in to Todos.\r\n\r\n' + link,
-    //html: '<h3>Hello!</h3><p>Click the link below to finish signing in to Todos.</p><p><a href="' + link + '">Sign in</a></p>',
-  //};
-  //return sendgrid.send(msg);
-//}, (user) => {
-  //console.log(user);
-//}));
+router.post('/login', authController.authorizeUser);
 
-/**
- * @openapi
- * /:
- *   get:
- *     description: Hello there!
- *     responses:
- *       200:
- *         description: This is index.
- */
-//router.post(
-  //'/magiclink',
-  //passport.authenticate(
-    //'magiclink',
-    //{
-      //action: 'acceptToken'
-    //}
-  //),
-  //(req, res) => res.redirect('/check-your-inbox')
-//);
-
-//app.get(
-  //'/magiclink/callback',
-  //passport.authenticate(
-    //'magiclink',
-    //{ action : 'acceptToken' }
-  //),
-  //(req, res) => res.redirect('/profile')
-//)
+router.get('/decode', authController.decodeJwt);
 
 module.exports = router;
