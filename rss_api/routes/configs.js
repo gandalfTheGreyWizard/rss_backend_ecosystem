@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const configController = require('../controllers/configs');
 const helperFunctions = require('../helpers/helperFunctions');
-
+const middlewares = require('../helpers/middlewares');
 /**
  * @openapi:
  * /configs/create:
@@ -19,6 +19,6 @@ const helperFunctions = require('../helpers/helperFunctions');
  *       200:
  *         description: Responds with the created user.
  */
-router.post('/create', helperFunctions.authorizeJwt, configController.createConfig);
+router.post('/create', middlewares.authorizeJwt, configController.createConfig);
 
 module.exports = router;
