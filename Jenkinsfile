@@ -1,20 +1,20 @@
 pipeline {
-    agent any
+    agent behemoth
 
     stages {
         stage('fuel') {
             steps {
-                echo 'fuel..'
+                checkout scm
             }
         }
         stage('ignition') {
             steps {
-                echo 'ignition..'
+                sh 'docker compose up'
             }
         }
         stage('takeoff') {
             steps {
-                echo 'takeoff..'
+                sh 'curl http://localhost:3000'
             }
         }
     }
