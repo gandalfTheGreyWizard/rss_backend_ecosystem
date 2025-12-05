@@ -1,0 +1,6 @@
+services:
+  rss-backend:
+    build:
+      context: rss_api
+    ports:
+      - 3000:3000
