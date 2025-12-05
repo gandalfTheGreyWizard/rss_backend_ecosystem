@@ -1,5 +1,5 @@
 pipeline {
-    agent behemoth
+    agent { label 'behemoth' }
 
     stages {
         stage('fuel') {
