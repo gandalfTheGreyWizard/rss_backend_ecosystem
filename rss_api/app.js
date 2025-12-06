@@ -8,7 +8,9 @@ const usersRouter = require('./routes/users');
 const configsRouter = require('./routes/configs');
 const authRouter = require('./routes/auth');
 
+const cors = require('cors');
 const app = express();
+app.use(cors());
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerJSDoc = require('swagger-jsdoc');

@@ -1,14 +1,14 @@
 # create user
-curl -XPOST localhost:3000/users/create -d '{"firstName":"npc","lastName": "aura","email": "npc@aura.com","password": "test"}' -H "Content-Type:application/json" | jq
+curl -XPOST localhost:3000/users/create -d '{"firstName":"npc","lastName": "aura","email": "npcnew@aura.com", "password": "testagain"}' -H "Content-Type:application/json" -H "Authorization:Bearer $(echo $TOKEN)" | jq
 
 # update user password
 curl -XPATCH localhost:3000/users/5/password -d '{"password": "testagain"}' -H "Content-Type:application/json" | jq
 
 #create config
-curl -XPOST localhost:3000/configs/create -d '{"userId": "1", "feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json"
+curl -XPOST localhost:3000/configs/create -d '{"userId": "12", "feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json" -H "Authorization:Bearer $(echo $TOKEN)" | jq
 
 # generate jwt token against existing user
 curl -XPOST localhost:3000/auth/login -d '{"email": "npcaura@yahoo.com.com", "password": "test"}' -H "Content-Type:application/json" | jq
 
 # get user by mail id
-curl localhost:3000/users/mail/npc@aura.com
+curl localhost:3000/users/mail/npc@aura.com -H "Authorization:Bearer $(echo $TOKEN)"

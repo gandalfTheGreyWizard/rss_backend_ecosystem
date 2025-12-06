@@ -19,7 +19,7 @@ const middlewares = require('../helpers/middlewares');
  *         description: It responds with a user object.
  */
 
-router.get('/mail/:mailId', userController.getUserByEmailId);
+router.get('/mail/:mailId', middlewares.authorizeJwt, userController.getUserByEmailId);
 
 /**
  * @openapi:
