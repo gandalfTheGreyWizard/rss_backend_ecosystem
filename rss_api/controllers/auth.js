@@ -13,7 +13,7 @@ exports.authorizeUser = async (req, res) => {
     if (checkPassword) {
       const userObject = helperFunctions.sanitizeUser(userAgainstMailId);
       const jwtToken = jwt.sign(userObject, 'static_secret', { expiresIn: "1h" });
-      res.send({ token: jwtToken.toString() });
+      res.send({ token: jwtToken.toString(), message: 'login successful' });
     } else {
       res.status(401).send({ message: 'invalid credentials provided' });
     }

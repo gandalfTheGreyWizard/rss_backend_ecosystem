@@ -37,11 +37,19 @@ exports.Config = sequelize.define(
 
 try {
   //userModel.User.sync({ force: true });
-  this.Config.sync({ force: true });
+  //this.Config.sync({ force: true });
 } catch(err) {
   logger.error('err', err);
 }
 
 exports.createConfig = async (configObject) => {
   return await this.Config.create(configObject);
+}
+
+exports.listConfig = async (userId) => {
+  const configsModelArr = await this.Config.findAll({where: {userId: userId}});
+  const configsArr = configsModelArr.map((eachConfig) => {
+    return eachConfig.dataValues;
+  });
+  return configsArr;
 }

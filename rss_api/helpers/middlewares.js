@@ -2,7 +2,7 @@ const logger = require('./logger');
 const jwt = require('jsonwebtoken');
 
 // middleware to check if the jwt token in the header is authorized
-exports.authorizeJwt = (req, res, next) => {
+exports.authorizeJwt = async (req, res, next) => {
   try {
     const jwtRequestToken = req.headers.authorization.split(" ")[1];
     console.log(jwt.verify(jwtRequestToken, 'static_secret'));
@@ -11,5 +11,12 @@ exports.authorizeJwt = (req, res, next) => {
     logger.error(err);
     res.status(403).send({ message: 'Unauthorized' });
   }
+}
+
+// get user details against jwt 
+exports.decodeJwt = async(headers) => {
+  const jwtRequestToken = headers.authorization.split(" ")[1];
+  const userDetails = jwt.decode(jwtRequestToken, 'static_secret');
+  return userDetails;
 }
 

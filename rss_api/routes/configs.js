@@ -21,4 +21,7 @@ const middlewares = require('../helpers/middlewares');
  */
 router.post('/create', middlewares.authorizeJwt, configController.createConfig);
 
+
+router.get('/list', middlewares.authorizeJwt, configController.listConfig);
+
 module.exports = router;
