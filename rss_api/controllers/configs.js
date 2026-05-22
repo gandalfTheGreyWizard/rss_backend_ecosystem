@@ -12,3 +12,4 @@ exports.createConfig = async (req,res) => {
     res.status(400).send({ message: 'error creating config' });
   }
 }
+

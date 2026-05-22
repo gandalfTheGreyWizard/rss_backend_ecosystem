@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 const crypto = require('crypto');
 const logger = require('../helpers/logger');
 
-const sequelize = require('./connection');
+const sequelize = require('../helpers/connection');
 exports.User = sequelize.define(
   'User',
   {
@@ -35,6 +35,12 @@ exports.User = sequelize.define(
     }
   }
 )
+
+try {
+  this.User.sync();
+} catch(err) { 
+  console.error(err);
+}
 
 exports.createUser = async (userObject) => {
   userObject.salt = crypto.randomBytes(16).toString('hex');

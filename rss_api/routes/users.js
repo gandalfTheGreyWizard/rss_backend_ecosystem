@@ -38,7 +38,7 @@ router.get('/mail/:mailId', userController.getUserByEmailId);
  *       200:
  *         description: Responds with the created user.
  */
-router.post('/create', helperFunctions.authorizeJwt, userController.createUser);
+router.post('/create', userController.createUser);
 
 /**
  * @openapi

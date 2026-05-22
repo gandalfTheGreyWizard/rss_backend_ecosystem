@@ -1,10 +1,8 @@
 //imports
 const { DataTypes } = require('sequelize');
 const logger = require('../helpers/logger');
-//const sequelize = new Sequelize('server=127.0.0.1;uid=root;pwd=example,database=testdb');
-//
+const sequelize = require('../helpers/connection');
 const userModel  = require('./user');
-const sequelize = require('./connection');
 
 //functional
 exports.Config = sequelize.define(
