@@ -21,4 +21,6 @@ const helperFunctions = require('../helpers/helperFunctions');
  */
 router.post('/create', helperFunctions.authorizeJwt, configController.createConfig);
 
+router.get('/list', helperFunctions.authorizeJwt, configController.listConfig);
+
 module.exports = router;
