@@ -23,10 +23,12 @@ exports.Config = sequelize.define(
     feedName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: "compositeIndex"
     },
     feedUrl: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: "compositeIndex"
     }
   }
 )
