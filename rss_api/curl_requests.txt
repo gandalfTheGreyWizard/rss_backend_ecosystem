@@ -8,7 +8,7 @@ curl -XPATCH localhost:3000/user/5/password -d '{"password": "testagain"}' -H "C
 curl -XPOST localhost:3000/config/create -d '{"feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
 
 # list all configs against a user
-curl localhost:3000/config/list -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"ot.org/Slashdot/slashdotMain"}'
+curl localhost:3000/config/list -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
 
 # login user
 curl -XPOST localhost:3000/auth/login -d '{"email": "npcaura@yahoo.com.com", "password": "test"}' -H "Content-Type:application/json" | jq

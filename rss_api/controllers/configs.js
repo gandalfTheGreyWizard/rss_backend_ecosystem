@@ -29,8 +29,7 @@ exports.listConfig = async(req, res) => {
     const responseObjects = configObjects.map((eachConfig) => {
       return eachConfig.dataValues;
     });
-    console.log(responseObjects);
-    res.send({});
+    res.send(responseObjects);
   } catch (err) {
     console.error(err);
     res.status(400).send();
