@@ -26,10 +26,14 @@ exports.authorizeUser = async (req, res) => {
 exports.decodeJwt = async (req, res) => {
   const jwtRequestToken = req.headers.authorization.split(" ")[1];
   try {
-    console.log(jwt.verify(jwtRequestToken, 'static_secret'));
-    console.log(jwt.decode(jwtRequestToken));
+    console.log('verification object ', jwt.verify(jwtRequestToken, 'static_secret'));
+    const responseObject = jwt.decode(jwtRequestToken);
+    responseObject['status'] = 'verified';
+    res.send(responseObject);
   } catch(err) {
-    logger.error(err);
+    logger.error('verification error object', err);
+    const responseObject = jwt.decode(jwtRequestToken);
+    responseObject['status'] = 'expired';
+    res.status(401).send(responseObject);
   }
-  res.send({message: 'headers in the query object'});
 }

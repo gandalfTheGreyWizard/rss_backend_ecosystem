@@ -19,16 +19,16 @@ exports.Config = sequelize.define(
         model: userModel.User,
         key: 'id',
       },
-      unique: 'compositeIndex',
     },
     feedName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: "compositeIndex"
     },
     feedUrl: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'compositeIndex',
+      unique: "compositeIndex"
     }
   }
 )
@@ -42,4 +42,12 @@ try {
 
 exports.createConfig = async (configObject) => {
   return await this.Config.create(configObject);
+}
+
+exports.listConfigs = async(userId) => {
+  return await this.Config.findAll({
+    where: {
+      userId: userId
+    }
+  });
 }

@@ -1,14 +1,23 @@
+------------------- user apis ----------------------
 # create user
-curl -XPOST localhost:3000/users/create -d '{"firstName":"npc","lastName": "aura","email": "npc@aura.com","password": "test"}' -H "Content-Type:application/json" | jq
-
-# update user password
-curl -XPATCH localhost:3000/users/5/password -d '{"password": "testagain"}' -H "Content-Type:application/json" | jq
-
-#create config
-curl -XPOST localhost:3000/configs/create -d '{"userId": "1", "feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json"
-
-# generate jwt token against existing user
-curl -XPOST localhost:3000/auth/login -d '{"email": "npcaura@yahoo.com.com", "password": "test"}' -H "Content-Type:application/json" | jq
+curl -XPOST localhost:3000/user/create -d '{"firstName":"npc","lastName": "aura","email": "npc@aura.com","password": "test"}' -H "Content-Type:application/json" | jq
 
 # get user by mail id
 curl localhost:3000/users/mail/npc@aura.com
+
+# update user password
+curl -XPATCH localhost:3000/user/5/password -d '{"password": "testagain"}' -H "Content-Type:application/json" | jq
+
+------------------- config apis --------------------
+# create config
+curl -XPOST localhost:3000/config/create -d '{"feedName": "Slash Dot", "feedUrl": "https://rss.slashdot.org/Slashdot/slashdotMain"}' -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
+
+# list all configs against a user
+curl localhost:3000/config/list -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
+
+---------------  auth apis --------------------
+# login user
+curl -XPOST localhost:3000/auth/login -d '{"email": "npcaura@yahoo.com.com", "password": "test"}' -H "Content-Type:application/json" | jq
+
+# decode user token
+curl localhost:3000/auth/decode -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
