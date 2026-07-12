@@ -1,7 +1,7 @@
 //imports
 const { DataTypes } = require('sequelize');
 const logger = require('../helpers/logger');
-const sequelize = require('../helpers/connection');
+const { sequelize } = require('../helpers/connection');
 const userModel  = require('./user');
 
 //functional

@@ -7,12 +7,14 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const configsRouter = require('./routes/configs');
 const authRouter = require('./routes/auth');
+const mastodonRouter = require('./routes/mastodon');
 
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerJSDoc = require('swagger-jsdoc');
 const YAML = require('yamljs');
+const logger = require('./helpers/logger');
 
 const jsdocComponents = YAML.load('components.yaml');
 const options = {
@@ -37,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/config', configsRouter);
 app.use('/auth', authRouter);
+app.use('/masto', mastodonRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 module.exports = app;

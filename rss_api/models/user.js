@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 const crypto = require('crypto');
 const logger = require('../helpers/logger');
 
-const sequelize = require('../helpers/connection');
+const { sequelize } = require('../helpers/connection');
 exports.User = sequelize.define(
   'User',
   {
